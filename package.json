@@ -2,10 +2,22 @@
   "name": "product-documentation-cli",
   "version": "1.0.0",
   "description": "product-documentation-cli",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": {
+    "pdcli": "dist/cli/index.js"
   },
-  "author": "",
-  "license": "ISC"
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node -r tsconfig-paths/register src/cli/main.ts"
+  },
+  "dependencies": {
+    "front-matter": "^4.0.2",
+    "inquirer": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^22.7.6",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.6.3"
+  }
 }
