@@ -7,7 +7,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "ts-node -r tsconfig-paths/register src/cli/main.ts"
+    "start": "ts-node -r tsconfig-paths/register src/cli/main.ts",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "front-matter": "^4.0.2",
