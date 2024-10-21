@@ -67,15 +67,13 @@ export class Documentation {
             return;
         }
 
-        if (file.attributes.id && file.attributes.published) {
-            const [path] = filePath.split('.');
-            this.content.push({
-                type: DocumentationModel.ElementType.ARTICLE,
-                link: path.replace(this.contentDir, ''),
-                content: file.body,
-                ...file.attributes,
-            });
-        }
+        const [path] = filePath.split('.');
+        this.content.push({
+            type: DocumentationModel.ElementType.ARTICLE,
+            link: path.replace(this.contentDir, ''),
+            content: file.body,
+            ...file.attributes,
+        });
     }
 
     private processMarkdownSection(filePath: string): void {
@@ -84,13 +82,11 @@ export class Documentation {
         if (!file) {
             return;
         }
-        if (file.attributes.published) {
-            this.content.push({
-                type: DocumentationModel.ElementType.SECTION,
-                link: dirname(filePath).replace(this.contentDir, ''),
-                ...file.attributes,
-            });
-        }
+        this.content.push({
+            type: DocumentationModel.ElementType.SECTION,
+            link: dirname(filePath).replace(this.contentDir, ''),
+            ...file.attributes,
+        });
     }
 
     private getFile<T>(path: string): void | FrontMatterResult<T> {

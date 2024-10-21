@@ -1,7 +1,5 @@
-#!/usr/bin/env node
-
 import { initDocumentation } from "../core/init";
-import { mainActions } from "./actions/main";
+import { mainActions } from "./commands/main";
 
 async function main() {
     const { createPromptModule } = await import('inquirer');
