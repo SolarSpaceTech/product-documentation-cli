@@ -4,8 +4,10 @@
   "description": "product-documentation-cli",
   "scripts": {
     "build": "node build.js",
-    "build:macos": "node build && pkg dist/index.js -t node18-macos-x64 --output pdcli",
-    "build:win": "node build && pkg dist/index.js -t node18-win-x64 --output pdcli",
+    "build:macos": "node build && pkg dist/index.js -t node18-macos-x64 --output platforms/pdcli-macos",
+    "build:win": "node build && pkg dist/index.js -t node18-win-x64 --output platforms/pdcli-win",
+    "build:linux": "node build && pkg dist/index.js -t node18-linux-x64 --output platforms/pdcli-linux",
+    "build:all": "node build && pkg dist/index.js -t node18-macos-x64,node18-win-x64,node18-linux-x64 --output platforms/pdcli",
     "start": "npm run build && node dist/index.js",
     "postinstall": "npm run build"
   },
