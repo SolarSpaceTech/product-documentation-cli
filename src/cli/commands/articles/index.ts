@@ -1,4 +1,4 @@
-import { idCommand } from "./id";
+import { idCommand } from "./id.command";
 import { getSelect } from "../../ui/select";
 
 export async function displayArticleActions(): Promise<void> {

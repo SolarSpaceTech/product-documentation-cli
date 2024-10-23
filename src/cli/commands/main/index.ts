@@ -1,6 +1,6 @@
-import { articlesCommand } from "./articles";
-import { sectionsCommand } from "./sections";
-import { settingsCommand } from "./settings";
+import { articlesCommand } from "./articles.command";
+import { sectionsCommand } from "./sections.command";
+import { settingsCommand } from "./settings.command";
 import { getSelect } from "../../ui/select";
 
 export async function displayMainMenuActions(): Promise<void> {
