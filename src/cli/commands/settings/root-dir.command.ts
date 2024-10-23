@@ -6,6 +6,6 @@ export const rootDirCommand: Command.Model = {
     name: 'Выбрать корневую директорию',
     isAvailable: true,
     async run() {
-        console.log(chalk.gray('Выбор коневой директории ещё не реализован'));
+        console.log(chalk.gray('Выбор корневой директории ещё не реализован'));
     },
 }
