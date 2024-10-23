@@ -3,6 +3,7 @@ export namespace Command {
         id: string;
         name: string;
         run(...args: any): void;
-        isAvailable?: boolean;
+        isAvailable: boolean;
+        description?: string;
     }
 }

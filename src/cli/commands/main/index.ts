@@ -1,9 +1,15 @@
-import { idCommand } from "./id";
-import { articleCommand } from "./article";
-import { sectionCommand } from "./section";
+import { articlesCommand } from "./articles";
+import { sectionsCommand } from "./sections";
+import { settingsCommand } from "./settings";
+import { getSelect } from "../../ui/select";
 
-export const mainActions = [
-    idCommand,
-    articleCommand,
-    sectionCommand,
-];
+export async function displayMainMenuActions(): Promise<void> {
+    const selectedChoice = await getSelect([
+        settingsCommand,
+        articlesCommand,
+        sectionsCommand,
+    ]);
+
+    selectedChoice.run();
+}
+
