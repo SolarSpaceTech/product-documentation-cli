@@ -1,9 +1,7 @@
-import { initDocumentation } from "../core/init";
 import { mainActions } from "./commands/main";
 import { createPromptModule } from "inquirer";
 
 async function main() {
-    initDocumentation();
     const prompt = createPromptModule();
     const answer = await prompt([
         {
