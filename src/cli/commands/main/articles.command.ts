@@ -5,7 +5,7 @@ export const articlesCommand: Command.Model = {
     id: 'articles',
     name: 'Статьи',
     isAvailable: true,
-    run() {
-        displayArticleActions();
+    async run() {
+        return displayArticleActions();
     },
 }

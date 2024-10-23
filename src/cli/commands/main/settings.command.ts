@@ -5,7 +5,7 @@ export const settingsCommand: Command.Model = {
     id: 'settings',
     name: 'Настройки',
     isAvailable: true,
-    run() {
-        displaySettingsActions();
+    async run() {
+        return displaySettingsActions();
     },
 }

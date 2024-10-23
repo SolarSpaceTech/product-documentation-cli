@@ -4,7 +4,7 @@ export const sectionsCommand: Command.Model = {
     id: 'sections',
     name: 'Секции',
     isAvailable: false,
-    run() {
+    async run() {
         console.log('Create new Section action');
     },
 }
