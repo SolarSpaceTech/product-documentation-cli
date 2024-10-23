@@ -25,5 +25,5 @@ export function updateSettings(newSettings: Partial<SettingsModel>): void {
         ...(settings ?? {}),
         ...newSettings,
     };
-    writeFileSync(SETTINGS_FILE_NAME, JSON.stringify(settings));
+    writeFileSync(SETTINGS_FILE_NAME, JSON.stringify(settings, null, 2));
 }
