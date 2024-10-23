@@ -1,28 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist",
-    "target": "ES2020",
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "target": "es2018",
+    "module": "commonjs",
+    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@core/*": ["src/core/*"],
-      "@cli/*": ["src/cli/*"]
-    }
+    "outDir": "./dist"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"],
-  "files": ["src/cli/main.ts"],
-  "tsc-alias": {
-    "verbose": false,
-    "resolveFullPaths": true,
-    "fileExtensions": {
-      "inputGlob": "{js,jsx,mjs}",
-      "outputCheck": ["js", "json", "jsx", "mjs"]
-    }
-  }
+  "exclude": ["node_modules"]
 }
