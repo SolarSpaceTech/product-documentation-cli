@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "product-documentation-cli",
   "scripts": {
-    "build": "node build.js",
+    "build": "node esbuild.config.js",
     "build:macos": "npm run build && pkg dist/index.js -t node18-macos-x64 --output platforms/pdcli-macos",
     "build:win": "npm run build && pkg dist/index.js -t node18-win-x64 --output platforms/pdcli-win",
     "build:linux": "npm run build && pkg dist/index.js -t node18-linux-x64 --output platforms/pdcli-linux",
     "build:all": "npm run build && pkg dist/index.js -t node18-macos-x64,node18-win-x64,node18-linux-x64 --output platforms/pdcli",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node dist/cli.js",
     "postinstall": "npm run build"
   },
   "dependencies": {
@@ -18,10 +18,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.7.6",
-    "esbuild": "^0.24.0",
-    "pkg": "5.8.1",
-    "ts-node": "^10.9.2",
-    "tsc-alias": "^1.8.10",
+    "esbuild": "0.24.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.3"
   }
