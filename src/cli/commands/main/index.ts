@@ -1,21 +1,17 @@
+import { getSelect } from "../../ui/select";
+import { addCommonCommands } from "../common/add-common-commands";
 import { articlesCommand } from "./articles.command";
 import { sectionsCommand } from "./sections.command";
-import { settingsCommand } from "./settings.command";
-import { getSelect } from "../../ui/select";
-import {stopCommand} from "./stop.command";
+import { pluginsCommand } from "./plugins.command";
 
 export async function displayMainMenuActions(): Promise<void> {
     while (true) {
-        const selectedChoice = await getSelect([
-            settingsCommand,
+        const commands = addCommonCommands([
             articlesCommand,
             sectionsCommand,
-            stopCommand,
+            pluginsCommand,
         ]);
-
-        if (selectedChoice.id === 'stop') {
-            break;
-        }
+        const selectedChoice = await getSelect(commands);
         await selectedChoice.run();
     }
 

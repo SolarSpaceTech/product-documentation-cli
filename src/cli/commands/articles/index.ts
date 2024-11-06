@@ -1,11 +1,11 @@
 import { idCommand } from "./id.command";
+import { addCommonCommands } from "../common/add-common-commands";
 import { getSelect } from "../../ui/select";
 
 export async function displayArticleActions(): Promise<void> {
-    const selectedChoice = await getSelect([
-        idCommand,
-    ]);
+    const commands = addCommonCommands([idCommand]);
+    const selectedChoice = await getSelect(commands);
 
-    selectedChoice.run();
+    return selectedChoice.run();
 }
 

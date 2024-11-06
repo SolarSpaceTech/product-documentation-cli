@@ -1,9 +1,10 @@
 import { Command } from "../../interfaces/command.interface";
-import { displaySettingsActions } from "../settings";
 
-export const stopCommand: Command.Model = {
+export const exitCommand: Command.Model = {
     id: 'stop',
     name: 'Выйти',
+    async run() {
+        process.exit(0);
+    },
     isAvailable: true,
-    async run() {},
 }
