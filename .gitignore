@@ -1,6 +1,6 @@
 /dist
 /node_modules
+/bin
+/plugins
 .idea/
-
-/platforms
-pdcli-settings.json
+.DS_Store
