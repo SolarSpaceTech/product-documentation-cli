@@ -1,11 +1,12 @@
 import { readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import {join, normalize} from "node:path";
 import { Command } from "../../interfaces/command.interface";
 import { multiplatformImport } from "../../multi-platform/import";
+import process from "process";
 
 export async function getPluginCommands(): Promise<Command.Model[]> {
     let dirItems: string[] = [];
-    const currentDir = 'plugins';
+    const currentDir = join(process.cwd(), normalize(process.env.PD_PLUGINS_DIR ?? "plugins"));
     try {
         dirItems = readdirSync(currentDir);
     } catch {
@@ -23,7 +24,7 @@ export async function getPluginCommands(): Promise<Command.Model[]> {
         if (!mainPluginFileName) {
             continue;
         }
-        let mainPluginFilePath = join(process.cwd(), currentPluginDir, mainPluginFileName);
+        let mainPluginFilePath = join(currentPluginDir, mainPluginFileName);
         const { plugin } = await multiplatformImport(mainPluginFilePath);
         if (plugin) {
             plugins.push(plugin);

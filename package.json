@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "product-documentation-cli",
   "scripts": {
-    "build": "node esbuild.config.js",
+    "build": "node esbuild.js",
     "build:macos": "npm run build && pkg dist/index.js -t node18-macos-x64 --output platforms/pdcli-macos",
     "build:win": "npm run build && pkg dist/index.js -t node18-win-x64 --output platforms/pdcli-win",
     "build:linux": "npm run build && pkg dist/index.js -t node18-linux-x64 --output platforms/pdcli-linux",
