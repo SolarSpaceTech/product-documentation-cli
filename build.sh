@@ -3,7 +3,7 @@
 # Проверка наличия версии
 if [ -z "$1" ]; then
   echo "Использование: $0 <версия-nodejs> [операционная_система] [архитектура]"
-  echo "Пример: $0 18.18.0 linux x64"
+  echo "Пример: $0 18.18.0 win x64"
   exit 1
 fi
 
@@ -13,7 +13,7 @@ OS=${2:-$(uname | tr '[:upper:]' '[:lower:]')}
 ARCH=${3:-$(uname -m)}
 
 # Проверка корректности операционной системы
-if [[ "$OS" != "linux" && "$OS" != "mac" && "$OS" != "win" ]]; then
+if [[ $OS != "all" && $OS != "mac" && $OS != "win" ]]; then
   echo "Ошибка: неподдерживаемая операционная система '$OS'."
   exit 1
 fi
@@ -29,5 +29,20 @@ case "$ARCH" in
     exit 1
     ;;
 esac
+
+BUILD_DIR="build"
+UTIL_FILE="index.js"
+ESBUILD_CONFIG_FILE="esbuild.js"
+RESULT_DIR="platforms"
+echo "Сборка CLI утилиты..."
+
+if ! node $ESBUILD_CONFIG_FILE "$BUILD_DIR/$UTIL_FILE"; then
+  echo "Ошибка: не удалось собрать утилиту."
+  exit 1
+fi
+
+if [ ! -d $RESULT_DIR ]; then
+  mkdir $RESULT_DIR
+fi
 
 ./util-builder/create-$OS.sh $VERSION $ARCH
