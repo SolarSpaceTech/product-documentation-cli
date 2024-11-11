@@ -85,7 +85,7 @@ cat run.sh $ARCHIVE_NAME > $RESULT_DIR/pd
 chmod +x $RESULT_DIR/pd
 
 # Очистка временных файлов
-rm -rf $NODE_DIR $BUILD_DIR $FILE_NAME $ARCHIVE_NAME run.sh
+rm -rf $NODE_DIR $BUILD_DIR/node $BUILD_DIR/plugins $FILE_NAME $ARCHIVE_NAME run.sh
 
 echo "Бинарный файл 'pd' создан и готов к использованию."
 echo "Запустите его командой: ./pd"

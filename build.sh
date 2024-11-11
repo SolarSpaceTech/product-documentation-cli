@@ -46,3 +46,5 @@ if [ ! -d $RESULT_DIR ]; then
 fi
 
 ./util-builder/create-$OS.sh $VERSION $ARCH
+
+rm -rf $BUILD_DIR

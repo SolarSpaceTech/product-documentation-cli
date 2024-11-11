@@ -94,7 +94,7 @@ fi
 
 cat run.bat $ARCHIVE_NAME > $RESULT_DIR/pd.bat
 
-rm -rf run.bat $ARCHIVE_NAME $BUILD_DIR $FILE_NAME $NODE_DIR
+rm -rf run.bat $ARCHIVE_NAME $BUILD_DIR/node.exe $BUILD_DIR/plugins $FILE_NAME $NODE_DIR
 
 echo "Бинарный файл 'pd.bat' создан и готов к использованию."
 echo "Запустите его командой: ./pd.bat"
