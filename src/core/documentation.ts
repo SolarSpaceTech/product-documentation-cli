@@ -6,13 +6,8 @@ import process from 'process';
 
 import { DocumentationModel } from './models/documentation.model';
 
-let instance: Documentation;
-
 export function getDocumentation(): Documentation {
-    if (!instance) {
-        instance = new Documentation();
-    }
-    return instance;
+    return new Documentation();
 }
 
 export class Documentation {
