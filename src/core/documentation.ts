@@ -1,18 +1,13 @@
 import frontMatter, { FrontMatterResult } from 'front-matter';
 
-import { extname, join, dirname, sep } from 'node:path';
+import { extname, join, dirname, sep, normalize } from 'node:path';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import process from 'process';
 
 import { DocumentationModel } from './models/documentation.model';
 
-let instance: Documentation;
-
 export function getDocumentation(): Documentation {
-    if (!instance) {
-        instance = new Documentation();
-    }
-    return instance;
+    return new Documentation();
 }
 
 export class Documentation {
@@ -22,7 +17,7 @@ export class Documentation {
     public contentMapById: Map<number, DocumentationModel.Type> = new Map();
 
     constructor() {
-        this.contentDir = join(process.cwd(), 'content');
+        this.contentDir = join(process.cwd(), normalize(process.env.PD_CONTENT_DIR ?? "content"));
         this.traverseDirectory(this.contentDir);
         this.content.forEach((contentItem) => {
             this.contentMapByPath.set(contentItem.link?.slice?.(1), contentItem);

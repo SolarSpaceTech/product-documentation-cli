@@ -2,7 +2,8 @@ export namespace Command {
     export interface Model {
         id: string;
         name: string;
-        run(...args: any): void;
-        isAvailable?: boolean;
+        run(...args: any): Promise<any>;
+        isAvailable: boolean;
+        description?: string;
     }
 }

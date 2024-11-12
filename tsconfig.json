@@ -1,28 +1,16 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "target": "es2018",
+    "module": "commonjs",
     "outDir": "./dist",
-    "target": "ES2020",
-    "module": "ESNext",
     "moduleResolution": "node",
+    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@core/*": ["src/core/*"],
-      "@cli/*": ["src/cli/*"]
-    }
+    "declaration": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"],
-  "files": ["src/cli/main.ts"],
-  "tsc-alias": {
-    "verbose": false,
-    "resolveFullPaths": true,
-    "fileExtensions": {
-      "inputGlob": "{js,jsx,mjs}",
-      "outputCheck": ["js", "json", "jsx", "mjs"]
-    }
-  }
+  "exclude": ["node_modules", "plugins"]
 }
