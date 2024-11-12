@@ -5,7 +5,6 @@ EXT="zip"
 BUILD_DIR="build"
 PLUGINS_DIR="plugins/$OS"
 RESULT_DIR="platforms/$OS"
-INSTRUCTION_DIR="instructions/win"
 INSTRUCTION_FILE="README.md"
 
 # Сформировать URL для скачивания
@@ -27,10 +26,21 @@ NODE_DIR="node-v$VERSION-$OS-$ARCH"
 
 # Копируем Node.js и плагины
 mv $NODE_DIR/node.exe $BUILD_DIR
-cp $INSTRUCTION_DIR/$INSTRUCTION_FILE $BUILD_DIR
 if [ -d $PLUGINS_DIR ]; then
   cp -R $PLUGINS_DIR $BUILD_DIR/plugins
 fi
+
+README_URL="https://raw.githubusercontent.com/SolarSpaceTech/product-documentation-help/refs/heads/main/ru/util/instruction/win.md"
+counter=0
+curl -s $README_URL | while IFS= read -r line; do
+    if [[ $counter -ge 2 ]]; then
+        echo $line >> $BUILD_DIR/$INSTRUCTION_FILE
+    fi
+
+    if [[ $line =~ ---[[:space:]]*$ ]]; then
+        ((counter++))
+    fi
+done
 
 # Создаем архив с содержимым сборки
 ARCHIVE_NAME="node_bundle.$EXT.b64"
