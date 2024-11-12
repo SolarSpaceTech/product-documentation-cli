@@ -5,6 +5,8 @@ EXT="zip"
 BUILD_DIR="build"
 PLUGINS_DIR="plugins/$OS"
 RESULT_DIR="platforms/$OS"
+INSTRUCTION_DIR="instructions/win"
+INSTRUCTION_FILE="README.md"
 
 # Сформировать URL для скачивания
 DOWNLOAD_URL="https://nodejs.org/dist/v$VERSION/node-v$VERSION-$OS-$ARCH.$EXT"
@@ -25,6 +27,7 @@ NODE_DIR="node-v$VERSION-$OS-$ARCH"
 
 # Копируем Node.js и плагины
 mv $NODE_DIR/node.exe $BUILD_DIR
+cp $INSTRUCTION_DIR/$INSTRUCTION_FILE $BUILD_DIR
 if [ -d $PLUGINS_DIR ]; then
   cp -R $PLUGINS_DIR $BUILD_DIR/plugins
 fi
@@ -39,6 +42,7 @@ cat << 'EOF' > run.bat
 set "OUT=bin"
 set "ENCODED_ARCHIVE=%OUT%.b64"
 set "DECODED_ARCHIVE=%OUT%.zip"
+set "INSTRUCTION_FILE=README.md"
 set "PLUGINS_DIR=plugins"
 set "PD_CONTENT_DIR=../content"
 
@@ -49,10 +53,11 @@ if not exist "%OUT%" (
     echo Directory bin not found. Creating bin and extracting files...
     @echo off
 
-    more +52 "%~f0" > %ENCODED_ARCHIVE%
+    more +54 "%~f0" > %ENCODED_ARCHIVE%
     powershell -command "([System.IO.File]::WriteAllBytes('%DECODED_ARCHIVE%', [System.Convert]::FromBase64String((Get-Content -Path '%ENCODED_ARCHIVE%' -Raw))))"
     powershell -command "Expand-Archive -Path %DECODED_ARCHIVE% -DestinationPath %OUT%"
     move %OUT%\%PLUGINS_DIR% %cd%
+    move %OUT%\%INSTRUCTION_FILE% %cd%
     mkdir %OUT%\%PLUGINS_DIR%
     del %ENCODED_ARCHIVE% %DECODED_ARCHIVE%
 
@@ -94,7 +99,7 @@ fi
 
 cat run.bat $ARCHIVE_NAME > $RESULT_DIR/pd.bat
 
-rm -rf run.bat $ARCHIVE_NAME $BUILD_DIR/node.exe $BUILD_DIR/plugins $FILE_NAME $NODE_DIR
+rm -rf run.bat $ARCHIVE_NAME $BUILD_DIR/node.exe $BUILD_DIR/plugins $BUILD_DIR/$INSTRUCTION_FILE $FILE_NAME $NODE_DIR
 
 echo "Бинарный файл 'pd.bat' создан и готов к использованию."
 echo "Запустите его командой: ./pd.bat"
