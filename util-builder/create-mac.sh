@@ -15,7 +15,6 @@ fi
 ARCHIVE_NAME="node_bundle.$EXT"
 tar -czf $ARCHIVE_NAME -C $BUILD_DIR .
 
-# Создаем исполняемый файл-обертку
 echo "Создаем исполняемый файл pd..."
 
 cat << 'EOF' > run.sh
@@ -37,14 +36,18 @@ CHROMIUM_VERSION="131.0.6778.85"
 BIN_DIR="bin"
 INSTRUCTION_FILE="README.md"
 PLUGINS_DIR="plugins"
-NODE_DIR="node-v$VERSION-$OS-$ARCH"
-NODE_ARCHIVE="$NODE_DIR.$EXT"
+NODE_DIR="node"
+TEMP_NODE_DIR="node-v$VERSION-$OS-$ARCH"
+NODE_ARCHIVE="$TEMP_NODE_DIR.$EXT"
 DOWNLOAD_URL="https://nodejs.org/dist/v$VERSION/$NODE_ARCHIVE"
 CHROMIUM="chrome-headless-shell"
-CHROMIUM_DIR="$CHROMIUM-mac-$ARCH"
-CHROMIUM_ARCHIVE="$CHROMIUM_DIR.zip"
+CHROMIUM_DIR="browser"
+TEMP_CHROMIUM_DIR="$CHROMIUM-mac-$ARCH"
+CHROMIUM_ARCHIVE="$TEMP_CHROMIUM_DIR.zip"
 CHROMIUM_DOWNLOAD_URL="https://storage.googleapis.com/chrome-for-testing-public/$CHROMIUM_VERSION/mac-$ARCH/$CHROMIUM_ARCHIVE"
 export PD_CONTENT_DIR="../content"
+export PD_BROWSER_PATH="./browser/chrome-headless-shell"
+export PD_PDF_DOC="../solar-space-doc.pdf"
 
 # Скачивание архива
 echo "Скачивание Node.js версии $VERSION для $OS-$ARCH..."
@@ -63,8 +66,8 @@ if [ ! -d $BIN_DIR ]; then
     tar -xzf $NODE_ARCHIVE -C .
 
     # Копируем Node.js
-    mv $NODE_DIR/bin/node $BIN_DIR
-    rm -r $NODE_ARCHIVE $NODE_DIR
+    mv $TEMP_NODE_DIR $BIN_DIR/$NODE_DIR
+    rm -r $NODE_ARCHIVE
 
     if ! curl -O $CHROMIUM_DOWNLOAD_URL; then
       echo "Ошибка: не удалось скачать Chromium."
@@ -73,7 +76,8 @@ if [ ! -d $BIN_DIR ]; then
 
     # Распаковка архива
     echo "Распаковка $CHROMIUM_ARCHIVE..."
-    unzip $CHROMIUM_ARCHIVE -d $BIN_DIR
+    unzip $CHROMIUM_ARCHIVE -d .
+    mv $TEMP_CHROMIUM_DIR $BIN_DIR/$CHROMIUM_DIR
     rm -r $CHROMIUM_ARCHIVE
 
     README_URL="https://raw.githubusercontent.com/SolarSpaceTech/product-documentation-help/refs/heads/main/ru/util/instruction/mac.md"
@@ -88,7 +92,7 @@ if [ ! -d $BIN_DIR ]; then
         fi
     done
 
-    tail -n +87 "$0" | tar -x -C $BIN_DIR
+    tail -n +92 "$0" | tar -x -C $BIN_DIR
     mv "$BIN_DIR/$PLUGINS_DIR" .
     mkdir "$BIN_DIR/$PLUGINS_DIR"
     echo "Файлы успешно распакованы"
@@ -110,7 +114,7 @@ fi
 
 echo "Запуск программы"
 cd "$BIN_DIR"
-exec ./node ./index.js
+exec ./$NODE_DIR/bin/node ./index.js
 EOF
 
 chmod +x run.sh
