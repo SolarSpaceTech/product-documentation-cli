@@ -48,6 +48,7 @@ CHROMIUM_DOWNLOAD_URL="https://storage.googleapis.com/chrome-for-testing-public/
 export PD_CONTENT_DIR="../content"
 export PD_BROWSER_PATH="./browser/chrome-headless-shell"
 export PD_PDF_DOC="../solar-space-doc.pdf"
+export PD_BOOK_CONFIG_DIR="./plugins/client/frontend/browser/book-configs"
 
 # Скачивание архива
 echo "Скачивание Node.js версии $VERSION для $OS-$ARCH..."
@@ -92,7 +93,7 @@ if [ ! -d $BIN_DIR ]; then
         fi
     done
 
-    tail -n +92 "$0" | tar -x -C $BIN_DIR
+    tail -n +93 "$0" | tar -x -C $BIN_DIR
     mv "$BIN_DIR/$PLUGINS_DIR" .
     mkdir "$BIN_DIR/$PLUGINS_DIR"
     echo "Файлы успешно распакованы"
