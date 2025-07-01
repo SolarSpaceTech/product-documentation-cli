@@ -13,7 +13,7 @@ OS=${2:-$(uname | tr '[:upper:]' '[:lower:]')}
 ARCH=${3:-$(uname -m)}
 
 # Проверка корректности операционной системы
-if [[ $OS != "all" && $OS != "mac" && $OS != "win" ]]; then
+if [[ $OS != "all" && $OS != "mac" && $OS != "win" && $OS != "linux" ]]; then
   echo "Ошибка: неподдерживаемая операционная система '$OS'."
   exit 1
 fi
@@ -48,3 +48,4 @@ fi
 ./util-builder/create-$OS.sh $VERSION $ARCH
 
 rm -rf $BUILD_DIR
+chmod +x util-builder/create-linux.sh
