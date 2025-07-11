@@ -58,6 +58,7 @@ set "TEMP_CHROMIUM_DIR=%CHROMIUM%-win%BROWSER_ARCH%"
 set "CHROMIUM_ARCHIVE=%TEMP_CHROMIUM_DIR%.zip"
 set "CHROMIUM_DOWNLOAD_URL=https://storage.googleapis.com/chrome-for-testing-public/%CHROMIUM_VERSION%/win%BROWSER_ARCH%/%CHROMIUM_ARCHIVE%"
 set "PD_CONTENT_DIR=../content"
+set "PD_WHITE_LABELS_DIR_PATH=../white-label"
 set "PD_BROWSER_PATH=./browser/chrome-headless-shell.exe"
 set "PD_PDF_DOC=../solar-space-doc.pdf"
 set "PD_BOOK_CONFIG_DIR=./plugins/client/frontend/browser/book-configs"
@@ -68,7 +69,7 @@ set "DECODED_ARCHIVE=%BIN_DIR%.zip"
 if not exist "%BIN_DIR%" (
     echo Directory bin not found. Creating bin and extracting files...
 
-    more +81 "%~f0" > %ENCODED_ARCHIVE%
+    more +82 "%~f0" > %ENCODED_ARCHIVE%
     powershell -command "([System.IO.File]::WriteAllBytes('%DECODED_ARCHIVE%', [System.Convert]::FromBase64String((Get-Content -Path '%ENCODED_ARCHIVE%' -Raw))))"
     powershell -command "Expand-Archive -Path %DECODED_ARCHIVE% -DestinationPath %BIN_DIR%"
     move %BIN_DIR%\%PLUGINS_DIR% %cd%
