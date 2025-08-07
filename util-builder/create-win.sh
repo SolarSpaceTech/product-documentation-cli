@@ -62,6 +62,7 @@ set "PD_WHITE_LABELS_DIR_PATH=../white-label"
 set "PD_BROWSER_PATH=./browser/chrome-headless-shell.exe"
 set "PD_PDF_DOC=../solar-space-doc.pdf"
 set "PD_BOOK_CONFIG_DIR=./plugins/client/frontend/browser/book-configs"
+set "IAM_SERVICE_DOMAIN=https://iam.solarspace.pro"
 
 set "ENCODED_ARCHIVE=%BIN_DIR%.b64"
 set "DECODED_ARCHIVE=%BIN_DIR%.zip"
@@ -69,7 +70,7 @@ set "DECODED_ARCHIVE=%BIN_DIR%.zip"
 if not exist "%BIN_DIR%" (
     echo Directory bin not found. Creating bin and extracting files...
 
-    more +82 "%~f0" > %ENCODED_ARCHIVE%
+    more +83 "%~f0" > %ENCODED_ARCHIVE%
     powershell -command "([System.IO.File]::WriteAllBytes('%DECODED_ARCHIVE%', [System.Convert]::FromBase64String((Get-Content -Path '%ENCODED_ARCHIVE%' -Raw))))"
     powershell -command "Expand-Archive -Path %DECODED_ARCHIVE% -DestinationPath %BIN_DIR%"
     move %BIN_DIR%\%PLUGINS_DIR% %cd%
